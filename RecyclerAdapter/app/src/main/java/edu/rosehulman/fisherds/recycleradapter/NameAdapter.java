@@ -20,6 +20,8 @@ public class NameAdapter extends RecyclerView.Adapter<NameAdapter.NameViewHolder
   private List<String> mNames;
   private Context mContext;
   private Random mRandom = new Random();
+  private RecyclerView mRecyclerView;
+
 
   public NameAdapter(Context context) {
     this.mNames = new ArrayList<>();
@@ -28,6 +30,13 @@ public class NameAdapter extends RecyclerView.Adapter<NameAdapter.NameViewHolder
     for (int i = 0; i < 5; i++) {
       mNames.add(getRandomName());
     }
+  }
+
+  @Override
+  public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+    super.onAttachedToRecyclerView(recyclerView);
+
+    mRecyclerView = recyclerView;
   }
 
   private String getRandomName() {
@@ -43,6 +52,7 @@ public class NameAdapter extends RecyclerView.Adapter<NameAdapter.NameViewHolder
   public void addName() {
     mNames.add(0, getRandomName());
     notifyDataSetChanged();
+    mRecyclerView.scrollToPosition(0); // Optional jump to the top if scrolled down.
   }
 
   public void removeName(int position) {
