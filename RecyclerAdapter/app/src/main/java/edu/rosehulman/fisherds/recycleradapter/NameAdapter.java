@@ -51,7 +51,12 @@ public class NameAdapter extends RecyclerView.Adapter<NameAdapter.NameViewHolder
 
   public void addName() {
     mNames.add(0, getRandomName());
-    notifyDataSetChanged();
+
+//    notifyDataSetChanged();
+    // Change to get a cool animation effect.
+    notifyItemInserted(0);
+    notifyItemRangeChanged(0, mNames.size());
+
     mRecyclerView.scrollToPosition(0); // Optional jump to the top if scrolled down.
   }
 
